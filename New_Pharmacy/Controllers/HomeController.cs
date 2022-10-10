@@ -19,7 +19,6 @@ namespace New_Pharmacy.Controllers
 
         public IActionResult Index()
         {
-            //var new_PharmacyContext = _context.Products.Include(p => p.Cat);
             var cat = _context.Categories.Include(p => p.Products);
             return View(cat);
         }
@@ -30,7 +29,8 @@ namespace New_Pharmacy.Controllers
         } 
         public IActionResult Shop()
         {
-            return View();
+            var cat = _context.Categories.Include(p => p.Products);
+            return View(cat);
         }
         public IActionResult Contact()
         {

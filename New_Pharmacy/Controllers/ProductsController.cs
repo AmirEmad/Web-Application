@@ -107,7 +107,7 @@ namespace New_Pharmacy.Controllers
             {
                 try
                 {
-                    EditUploadFile(product);
+                    Uplaod_File(product);
                     //var entities = _context.Products.AsNoTracking();
                     _context.Update(product);
                     await _context.SaveChangesAsync();
@@ -174,31 +174,24 @@ namespace New_Pharmacy.Controllers
 
         void Uplaod_File(Product product)
         {
+            
             string rootpath = Path.Combine(_hosting.WebRootPath, "Uploads");
             string filename = product.FileUplaod.FileName;
             string fullpath = Path.Combine(rootpath, filename);
+            if (product.Image != null)
+            {
+                string oldpath = _context.Products.Find(product.Id).Image;
+                string fulloldpath = Path.Combine(rootpath, oldpath);
+                if (fullpath != fulloldpath)
+                {
+                    System.IO.File.Delete(fulloldpath);
+                    //product.FileUplaod.CopyTo(new FileStream(fullpath, FileMode.Create));
+                }
+            }
             product.FileUplaod.CopyTo(new FileStream(fullpath, FileMode.Create));
             product.Image = filename;
         }
 
-        void EditUploadFile(Product product)
-        {
-
-            string rootpath = Path.Combine(_hosting.WebRootPath, "Uploads");
-            string filename = product.FileUplaod.FileName;
-            string fullpath = Path.Combine(rootpath, filename);
-
-            string oldpath = _context.Products.Find(product.Id).Image;
-            string fulloldpath = Path.Combine(rootpath, oldpath);
-            if (fullpath != fulloldpath)
-            {
-                System.IO.File.Delete(fulloldpath);
-                product.FileUplaod.CopyTo(new FileStream(fullpath, FileMode.Create));
-            }
-            product.Image = filename;
-
-        }
-       
         [HttpPost]
         public async Task<IActionResult> Search(string term)
         {
