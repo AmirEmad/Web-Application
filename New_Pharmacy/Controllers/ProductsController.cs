@@ -108,6 +108,7 @@ namespace New_Pharmacy.Controllers
                 try
                 {
                     EditUploadFile(product);
+                    //var entities = _context.Products.AsNoTracking();
                     _context.Update(product);
                     await _context.SaveChangesAsync();
                 }

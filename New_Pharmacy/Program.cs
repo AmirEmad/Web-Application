@@ -12,11 +12,11 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+    .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultUI().AddDefaultTokenProviders();
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<New_PharmacyContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("New_PharmacyConn")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("New_PharmacyConn")).UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
 
 var app = builder.Build();
 
