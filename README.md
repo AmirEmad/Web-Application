@@ -13,6 +13,7 @@ i use a code first strategy in this app .
 4. search .
 5. register / login with Identity .
 6. Filter categories with her Name .
-7. more feature (in progress)
+7. Shop .
+8. more feature (in progress)
 
 
