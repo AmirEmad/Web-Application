@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using New_Pharmacy.Models;
 using System.Diagnostics;
+using System.Dynamic;
 
 namespace New_Pharmacy.Controllers
 {
@@ -31,6 +32,15 @@ namespace New_Pharmacy.Controllers
         {
             var cat = _context.Categories.Include(p => p.Products);
             return View(cat);
+        } 
+        public IActionResult Shop_Details(int id)
+        {
+            var product = _context.Products.Include(p => p.Cat).SingleOrDefault(x => x.Id == id);
+            var cat = _context.Categories.Include(p => p.Products).Where(x => x.Id==product.CatId);
+            dynamic dynamic = new ExpandoObject();
+            dynamic.catlist = cat;  
+            dynamic.pro = product;
+            return View(dynamic);
         }
         public IActionResult Contact()
         {

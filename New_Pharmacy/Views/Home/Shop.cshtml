@@ -17,12 +17,12 @@
                                     <!-- Product name-->
                                     <h5 class="fw-bolder">@proitem.Name</h5>
                                     <!-- Product price-->
-                                    @proitem.Price
+                                    @proitem.Price L.E
                         </div>
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div>
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" asp-action="Shop_Details" asp-route-id="@proitem.Id">View options</a></div>
                             </div>
                         </div>
                     </div>
